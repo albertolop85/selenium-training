@@ -13,17 +13,17 @@ import org.testng.annotations.Test;
 public class ImprovedBasicTest {
 	
 	private WebDriver driver;
+	private WebDriverWait wait;
 
 	@BeforeMethod
 	public void setup() {
 		driver = new ChromeDriver();
 		driver.get("http://www.google.com");
+		wait = new WebDriverWait(driver, 15);
 	}
 	
 	@Test
 	public void testImprovedBasicFlow() {
-		
-		WebDriverWait wait = new WebDriverWait(driver, 15);
 		
 		// Google Home Page
 		wait.until(ExpectedConditions.elementToBeClickable(
@@ -39,8 +39,6 @@ public class ImprovedBasicTest {
 		String title = driver.getTitle();
 		
 		Assert.assertTrue(title.contains("Wikipedia"), "Title didn't include 'Wikipedia'");
-		
-		driver.quit();
 	}
 	
 	@AfterMethod
